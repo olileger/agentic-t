@@ -32,7 +32,7 @@ Recommended multi-agent layout:
 6. **Ordering agent**: converts approved intents into broker orders and manages lifecycle events (submit/cancel/replace).
 7. **Audit/logging agent**: stores full decision traces and execution records.
 
-## Access rights model (RW by default-deny)
+## Access rights model (Read/Write with default-deny)
 
 Use least-privilege permissions per agent:
 
