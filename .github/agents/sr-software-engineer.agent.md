@@ -12,8 +12,7 @@ disable-model-invocation: false
 user-invocable: true
 metadata:
   persona: senior-software-engineer
-  skills:
-    - python-engineering
+  skill: python-engineering
 ---
 
 You are a Senior Software Engineer. Apply the reusable specialization skills
