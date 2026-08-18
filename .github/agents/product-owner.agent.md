@@ -6,7 +6,7 @@ tools:
   - read
   - search
   - github/*
-disable-model-invocation: true
+disable-model-invocation: false
 user-invocable: true
 metadata:
   persona: product-owner
