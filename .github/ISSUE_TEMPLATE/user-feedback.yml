@@ -3,7 +3,6 @@ description: Share an observed user problem, unmet need, or product opportunity.
 title: "[Feedback] "
 labels:
   - user-feedback
-  - needs-triage
 body:
   - type: markdown
     attributes:
