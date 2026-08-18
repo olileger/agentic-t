@@ -46,8 +46,8 @@ Use least-privilege permissions per agent:
 
 ## Product discovery workflow
 
-Product discovery is managed through structured GitHub Issue Forms and the
-compiled GitHub Agentic Workflow in
+Product discovery starts through the structured **User Feedback** Issue Form and
+is managed by the compiled GitHub Agentic Workflow in
 `.github/workflows/product-discovery.lock.yml`.
 
 1. Create a **User Feedback** issue.
@@ -61,7 +61,8 @@ compiled GitHub Agentic Workflow in
 
 **Bug** issues remain outside this automatic product-discovery path. Agent
 definitions live in `.github/agents/` and their reusable methods live in
-`.github/skills/`.
+`.github/skills/`. Product Requests are created only by the workflow; no public
+Product Request form or blank Issue entry is available.
 
 ## Engineering agents
 
