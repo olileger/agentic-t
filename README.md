@@ -62,3 +62,9 @@ compiled GitHub Agentic Workflow in
 **Bug** issues remain outside this automatic product-discovery path. Agent
 definitions live in `.github/agents/` and their reusable methods live in
 `.github/skills/`.
+
+## Engineering agents
+
+- **sr software engineer**: designs, implements, reviews, tests, and maintains
+  production-grade software. Technology expertise is supplied through reusable
+  skills, currently `python-engineering`.
