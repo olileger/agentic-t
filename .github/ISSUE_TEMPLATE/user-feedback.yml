@@ -1,0 +1,71 @@
+name: User Feedback
+description: Share an observed user problem, unmet need, or product opportunity.
+title: "[Feedback] "
+labels:
+  - user-feedback
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the problem rather than prescribing a solution. A maintainer can
+        apply the `ai-product-discovery` label to start the multi-agent analysis.
+  - type: dropdown
+    id: source
+    attributes:
+      label: Feedback source
+      options:
+        - Direct personal experience
+        - User interview
+        - Support request
+        - Usage observation
+        - Internal stakeholder
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: user-context
+    attributes:
+      label: User and context
+      description: Who encountered the problem, and in what situation?
+      placeholder: A user managing a personal portfolio while...
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Observed problem
+      description: What was difficult, impossible, risky, or inefficient?
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: Describe the consequence, frequency, and severity when known.
+    validations:
+      required: true
+  - type: textarea
+    id: current-workaround
+    attributes:
+      label: Current workaround
+      description: How is the user solving or avoiding the problem today?
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Add links, screenshots, quotes, metrics, or related issues.
+  - type: textarea
+    id: desired-outcome
+    attributes:
+      label: Desired outcome
+      description: What should become easier or possible? Avoid detailed implementation instructions.
+    validations:
+      required: true
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Submission check
+      options:
+        - label: I searched for existing feedback and product requests covering the same problem.
+          required: true

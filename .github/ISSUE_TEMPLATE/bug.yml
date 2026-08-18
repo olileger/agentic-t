@@ -1,0 +1,81 @@
+name: Bug
+description: Report reproducible behavior that differs from the expected product behavior.
+title: "[Bug] "
+labels:
+  - bug
+  - needs-triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include credentials, account numbers, private portfolio data, or
+        other secrets. A maintainer can apply `ai-product-discovery` when the bug
+        indicates a broader product requirement.
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current behavior
+      description: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: What should have happened?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Configure ...
+        2. Run ...
+        3. Observe ...
+    validations:
+      required: true
+  - type: dropdown
+    id: frequency
+    attributes:
+      label: Frequency
+      options:
+        - Always
+        - Often
+        - Intermittently
+        - Once
+        - Unknown
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - Critical - unsafe behavior or potential financial impact
+        - High - core workflow blocked
+        - Medium - degraded workflow with a workaround
+        - Low - limited inconvenience
+        - Unknown
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include version, operating system, configuration, and relevant integrations.
+      render: shell
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs and evidence
+      description: Add sanitized logs, screenshots, and related issues.
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Submission checks
+      options:
+        - label: I searched for an existing issue describing this behavior.
+          required: true
+        - label: I removed credentials and sensitive financial information.
+          required: true

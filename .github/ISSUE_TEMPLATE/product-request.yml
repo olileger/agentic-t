@@ -1,0 +1,103 @@
+name: Product Request
+description: Propose a reviewed product capability with business and technical analysis.
+title: "[Product Request] "
+labels:
+  - product-request
+  - needs-human-review
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Product Requests may be authored by humans or generated from User Feedback
+        and Bug issues by the product discovery workflow. Approval remains a human decision.
+  - type: textarea
+    id: sources
+    attributes:
+      label: Source signals
+      description: Link the User Feedback, Bug, research, metrics, or discussions supporting this request.
+      placeholder: |
+        - #123
+        - Support theme: ...
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: State the user problem without embedding the proposed implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: users
+    attributes:
+      label: Users and scenarios
+      description: Identify affected users, contexts, and primary scenarios.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome and success measures
+      description: Define observable outcomes and measurable success criteria.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      placeholder: |
+        In scope:
+        -
+
+        Out of scope:
+        -
+    validations:
+      required: true
+  - type: textarea
+    id: user-stories
+    attributes:
+      label: User stories
+      description: Include actors, goals, value, and relevant alternative scenarios.
+      placeholder: As a ..., I want ..., so that ...
+    validations:
+      required: true
+  - type: textarea
+    id: business-rules
+    attributes:
+      label: Business rules and edge cases
+      description: Capture domain rules, exceptions, permissions, and failure cases.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: Write testable, implementation-independent criteria.
+      placeholder: |
+        Given ...
+        When ...
+        Then ...
+    validations:
+      required: true
+  - type: textarea
+    id: technical-assessment
+    attributes:
+      label: Technical assessment
+      description: Summarize feasibility, architecture impact, dependencies, and non-functional requirements.
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Risks, assumptions, and open decisions
+      description: Highlight what must be validated or decided by humans.
+    validations:
+      required: true
+  - type: checkboxes
+    id: human-review
+    attributes:
+      label: Human review
+      options:
+        - label: Product value and priority have been reviewed by a human Product Owner.
+        - label: Business rules have been reviewed by a domain expert.
+        - label: Technical feasibility has been reviewed by a human Tech Lead.
