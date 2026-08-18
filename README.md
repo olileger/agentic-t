@@ -50,8 +50,8 @@ Product discovery is managed through structured GitHub Issue Forms and the
 compiled GitHub Agentic Workflow in
 `.github/workflows/product-discovery.lock.yml`.
 
-1. Create a **User Feedback** or **Bug** issue.
-2. A maintainer triages the signal and applies `ai-product-discovery`.
+1. Create a **User Feedback** issue.
+2. The `user-feedback` label starts the workflow automatically.
 3. The workflow coordinates the Product Owner, Business Analyst, and Tech Lead
    custom agents.
 4. The agents create a draft **Product Request** labeled
@@ -59,6 +59,6 @@ compiled GitHub Agentic Workflow in
 5. Humans approve product scope, business rules, and technical feasibility
    before implementation planning starts.
 
-The command label is intentionally human-controlled to prevent every incoming
-issue from consuming AI resources. Agent definitions live in `.github/agents/`
-and their reusable methods live in `.github/skills/`.
+**Bug** issues remain outside this automatic product-discovery path. Agent
+definitions live in `.github/agents/` and their reusable methods live in
+`.github/skills/`.

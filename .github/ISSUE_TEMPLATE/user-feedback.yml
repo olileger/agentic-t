@@ -8,8 +8,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Describe the problem rather than prescribing a solution. A maintainer can
-        apply the `ai-product-discovery` label to start the multi-agent analysis.
+        Describe the problem rather than prescribing a solution. Submitting this
+        form starts the multi-agent product discovery analysis automatically.
   - type: dropdown
     id: source
     attributes:

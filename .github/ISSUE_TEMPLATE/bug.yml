@@ -9,8 +9,8 @@ body:
     attributes:
       value: |
         Do not include credentials, account numbers, private portfolio data, or
-        other secrets. A maintainer can apply `ai-product-discovery` when the bug
-        indicates a broader product requirement.
+        other secrets. Bugs are triaged separately and do not automatically start
+        product discovery.
   - type: textarea
     id: current-behavior
     attributes:
