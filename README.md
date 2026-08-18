@@ -47,8 +47,9 @@ Use least-privilege permissions per agent:
 ## Product discovery workflow
 
 Product discovery starts through the structured **User Feedback** Issue Form and
-is managed by the compiled GitHub Agentic Workflow in
-`.github/workflows/product-discovery.lock.yml`.
+is managed by the compiled GitHub Agentic Workflows in
+`.github/workflows/product-discovery.lock.yml` and
+`.github/workflows/product-refinement.lock.yml`.
 
 1. Create a **User Feedback** issue.
 2. The `user-feedback` label starts the workflow automatically.
@@ -56,7 +57,9 @@ is managed by the compiled GitHub Agentic Workflow in
    custom agents.
 4. The agents create a draft **Product Request** labeled
    `needs-human-review`.
-5. Humans approve product scope, business rules, and technical feasibility
+5. Humans add clarifications as comments on the Product Request, then post
+   `/refine` to have the agents revise the existing request from those comments.
+6. Humans approve product scope, business rules, and technical feasibility
    before implementation planning starts.
 
 **Bug** issues remain outside this automatic product-discovery path. Agent
