@@ -17,6 +17,20 @@ description: Use when evaluating technical feasibility, architecture impact, non
 7. Classify risks by impact and mitigation.
 8. State whether the request is ready for implementation planning.
 
+## Agentic Python architecture
+
+- When the proposed solution requires agents or multi-agent orchestration in
+  Python, use Microsoft Agent Framework as the required implementation framework.
+- Prefer its `Workflow` model for explicit multi-agent execution, coordination,
+  long-running state, checkpoints, and human-in-the-loop control.
+- Use the official `agent-framework` Python package and verify current APIs
+  against Microsoft Learn before producing an implementation design.
+- Do not introduce AutoGen, Semantic Kernel, LangGraph, CrewAI, or another
+  agent framework as a parallel orchestration layer.
+- A different framework may be proposed only when a concrete incompatibility
+  with Microsoft Agent Framework is documented, alternatives are evaluated, and
+  a human Tech Lead approves the exception.
+
 ## Quality rules
 
 - Separate repository facts from inferred or proposed architecture.

@@ -37,6 +37,25 @@ description: Use when designing, implementing, debugging, testing, reviewing, or
 - Maintain compatibility with the Python versions and dependency constraints
   declared by the project.
 
+## Agentic solutions
+
+- Use Microsoft Agent Framework for any Python implementation that requires AI
+  agents, tool-using agents, multi-agent coordination, or agentic workflows.
+- Install and import the official `agent-framework` package; verify current
+  package names and APIs against Microsoft Learn before coding because the
+  framework evolves.
+- Use an agent for open-ended reasoning or autonomous tool use. Use an Agent
+  Framework `Workflow` when execution order, multiple participants,
+  checkpoints, durable state, or human approval must be controlled explicitly.
+- Prefer deterministic Python functions over agents when ordinary code can
+  solve the requirement reliably.
+- Do not combine Microsoft Agent Framework with AutoGen, Semantic Kernel,
+  LangGraph, CrewAI, or another orchestration framework unless a documented
+  incompatibility requires an exception approved by a human Tech Lead.
+- Preserve explicit authorization boundaries, typed inputs and outputs,
+  observability, resumability, idempotency, and auditable human-in-the-loop
+  decisions.
+
 ## Quality rules
 
 - Do not use bare `except`, broad exception swallowing, or success-shaped
