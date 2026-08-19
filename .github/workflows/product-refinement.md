@@ -82,7 +82,19 @@ disagreements, and which human comments resolved or changed open decisions.
 Do not expose private chain-of-thought or copy the `/refine` command into the
 Product Request.
 
-After updating the body, add one concise comment stating that the Product Request
-was revised from the available human clarifications. Do not claim it is approved
-or ready for implementation unless all required human approval gates were
-already checked before the run.
+After updating the body, add one concise review comment using exactly these
+headings:
+
+- `### Added`
+- `### Removed`
+- `### Changed`
+- `### Still to clarify`
+
+Under each heading, list the material Product Request changes as short bullets
+and cite the affected section names. Write `- None` when a category is empty.
+Under `Still to clarify`, list unresolved decisions or contradictions that still
+require a human answer; write `- None` only when no such point remains. Do not
+repeat the complete Product Request, expose private chain-of-thought, or include
+minor wording-only edits. Do not claim the Product Request is approved or ready
+for implementation unless all required human approval gates were already checked
+before the run.
