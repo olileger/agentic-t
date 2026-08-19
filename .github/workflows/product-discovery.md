@@ -63,8 +63,6 @@ Create exactly one Product Request issue only when all three analyses completed.
 Use a specific outcome-oriented title without repeating the `[Product Request]`
 prefix.
 
-Initialize all three `Human approval gates` checkboxes as unchecked.
-
 After creating the Product Request, add one concise comment to the source issue
 stating that a draft was created for human review. Do not claim it is approved
 or ready for implementation.

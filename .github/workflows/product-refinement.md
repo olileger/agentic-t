@@ -69,9 +69,6 @@ comments.
 - Treat explicit human answers in comments as decisions only when they clearly
   resolve a named open question. Preserve ambiguity as an open decision instead
   of guessing.
-- Preserve the checked or unchecked state of every Human approval gate exactly
-  as it appears before this run. Agents must never grant or revoke human
-  approval.
 
 ## Updated Product Request
 
@@ -82,7 +79,6 @@ is required because slash-command safe outputs cannot reliably infer the
 triggering issue context. Never create another issue and never update the title,
 labels, status, or any other issue.
 
-In `Human approval gates`, preserve all checkbox states from the current issue.
 In `Agent review trace`, summarize each agent's revised contribution,
 disagreements, and which human comments resolved or changed open decisions.
 Do not expose private chain-of-thought or copy the `/refine` command into the
@@ -103,5 +99,4 @@ Under `Still to clarify`, list unresolved decisions or contradictions that still
 require a human answer; write `- None` only when no such point remains. Do not
 repeat the complete Product Request, expose private chain-of-thought, or include
 minor wording-only edits. Do not claim the Product Request is approved or ready
-for implementation unless all required human approval gates were already checked
-before the run.
+for implementation.

@@ -53,15 +53,7 @@ Every created or revised Product Request body must contain:
 11. `## Non-functional requirements`
 12. `## Risks and dependencies`
 13. `## Assumptions and open decisions`
-14. `## Human approval gates`
-15. `## Agent review trace`
+14. `## Agent review trace`
 
-The `Human approval gates` section must contain:
-
-- Product Owner approval of value, priority, and scope
-- Domain expert approval of rules and acceptance criteria
-- Tech Lead approval of feasibility, risks, and architecture direction
-
-Follow the mode-specific instructions for whether those checkboxes are initialized
-or preserved. Under `Agent review trace`, summarize each agent's contribution and
-disagreements without exposing private chain-of-thought.
+Under `Agent review trace`, summarize each agent's contribution and disagreements
+without exposing private chain-of-thought.
