@@ -31,9 +31,12 @@ safe-outputs:
     required-labels:
       - product-request
     max: 1
-    target: triggering
+    target: "*"
   add-comment:
-    target: triggering
+    target: "*"
+    required-title-prefix: "[Product Request] "
+    required-labels:
+      - product-request
     max: 1
   noop:
 timeout-minutes: 20
@@ -72,9 +75,12 @@ comments.
 
 ## Updated Product Request
 
-Update only the triggering Product Request using `update_issue` with
-`operation: "replace"` and a complete revised body. Never create another issue
-and never update the title, labels, status, or any other issue.
+Update only Product Request #${{ github.event.issue.number }} using
+`update_issue` with `issue_number: ${{ github.event.issue.number }}`,
+`operation: "replace"`, and a complete revised body. The explicit issue number
+is required because slash-command safe outputs cannot reliably infer the
+triggering issue context. Never create another issue and never update the title,
+labels, status, or any other issue.
 
 In `Human approval gates`, preserve all checkbox states from the current issue.
 In `Agent review trace`, summarize each agent's revised contribution,
@@ -82,8 +88,9 @@ disagreements, and which human comments resolved or changed open decisions.
 Do not expose private chain-of-thought or copy the `/refine` command into the
 Product Request.
 
-After updating the body, add one concise review comment using exactly these
-headings:
+After updating the body, call `add_comment` with
+`item_number: ${{ github.event.issue.number }}` and one concise review comment
+using exactly these headings:
 
 - `### Added`
 - `### Removed`
