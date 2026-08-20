@@ -69,6 +69,11 @@ comments.
 - Treat explicit human answers in comments as decisions only when they clearly
   resolve a named open question. Preserve ambiguity as an open decision instead
   of guessing.
+- Do not reopen a behavior or decision already stated explicitly in the issue or
+  comments merely because an alternative exists.
+- Apply the shared decision classification to every remaining uncertainty.
+  Refinement is complete when no blocking decision remains; working assumptions
+  and implementation details do not require another human response.
 
 ## Updated Product Request
 
@@ -95,8 +100,9 @@ using exactly these headings:
 
 Under each heading, list the material Product Request changes as short bullets
 and cite the affected section names. Write `- None` when a category is empty.
-Under `Still to clarify`, list unresolved decisions or contradictions that still
-require a human answer; write `- None` only when no such point remains. Do not
+Under `Still to clarify`, list only blocking decisions or contradictions that
+still require a human answer. Do not list working assumptions or implementation
+details there, and write `- None` when no blocking decision remains. Do not
 repeat the complete Product Request, expose private chain-of-thought, or include
 minor wording-only edits. Do not claim the Product Request is approved or ready
 for implementation.

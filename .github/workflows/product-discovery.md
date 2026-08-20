@@ -63,6 +63,10 @@ Create exactly one Product Request issue only when all three analyses completed.
 Use a specific outcome-oriented title without repeating the `[Product Request]`
 prefix.
 
+Treat the source description as sufficient when the shared decision rules leave
+no blocking decision. Do not delay the draft or solicit clarification for
+working assumptions or implementation details.
+
 After creating the Product Request, add one concise comment to the source issue
 stating that a draft was created for human review. Do not claim it is approved
 or ready for implementation.
