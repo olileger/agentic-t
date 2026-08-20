@@ -32,6 +32,22 @@ safe-outputs:
       - product-request
     max: 1
     target: "*"
+  add-labels:
+    allowed:
+      - needs-human-review
+    required-title-prefix: "[Product Request] "
+    required-labels:
+      - product-request
+    max: 1
+    target: "*"
+  remove-labels:
+    allowed:
+      - needs-human-review
+    required-title-prefix: "[Product Request] "
+    required-labels:
+      - product-request
+    max: 1
+    target: "*"
   add-comment:
     target: "*"
     required-title-prefix: "[Product Request] "
@@ -88,6 +104,21 @@ In `Agent review trace`, summarize each agent's revised contribution,
 disagreements, and which human comments resolved or changed open decisions.
 Do not expose private chain-of-thought or copy the `/refine` command into the
 Product Request.
+
+After updating the body, synchronize the `needs-human-review` label on Product
+Request #${{ github.event.issue.number }}:
+
+- If at least one blocking decision remains, call `add_labels` with
+  `item_number: ${{ github.event.issue.number }}` and only the
+  `needs-human-review` label.
+- If no blocking decision remains, call `remove_labels` with
+  `item_number: ${{ github.event.issue.number }}` and only the
+  `needs-human-review` label.
+
+Perform exactly one of these label operations. The label indicates that a
+current blocking decision requires human input; it must not represent generic
+draft review, AI authorship, working assumptions, or deferred implementation
+details. Never add or remove another label.
 
 After updating the body, call `add_comment` with
 `item_number: ${{ github.event.issue.number }}` and one concise review comment

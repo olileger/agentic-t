@@ -27,10 +27,17 @@ safe-outputs:
     labels:
       - product-request
       - ai-generated
-      - needs-human-review
     max: 1
     expires: false
     deduplicate-by-title: 2
+  add-labels:
+    allowed:
+      - needs-human-review
+    required-title-prefix: "[Product Request] "
+    required-labels:
+      - product-request
+    max: 1
+    target: "*"
   add-comment:
     target: triggering
     max: 1
@@ -61,12 +68,24 @@ label.
 
 Create exactly one Product Request issue only when all three analyses completed.
 Use a specific outcome-oriented title without repeating the `[Product Request]`
-prefix.
+prefix. Call `create_issue` with `temporary_id: "aw_product"` so the new Product
+Request can be referenced by subsequent safe outputs in the same run. Do not
+provide additional labels; `product-request` and `ai-generated` are applied by
+the workflow configuration.
 
 Treat the source description as sufficient when the shared decision rules leave
 no blocking decision. Do not delay the draft or solicit clarification for
 working assumptions or implementation details.
 
+If at least one blocking decision remains after synthesis, call `add_labels`
+with `item_number: "#aw_product"` and only the `needs-human-review` label. If no
+blocking decision remains, do not call `add_labels`. The label indicates that a
+current blocking decision requires human input; it must not represent generic
+draft review, AI authorship, working assumptions, or deferred implementation
+details.
+
 After creating the Product Request, add one concise comment to the source issue
-stating that a draft was created for human review. Do not claim it is approved
-or ready for implementation.
+stating that a draft was created. Mention the blocking decisions when
+`needs-human-review` was added; otherwise, do not solicit further
+clarification. Do not claim the Product Request is approved or ready for
+implementation.
