@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "agentict"
+version = "0.1.0"
+description = "One-time PESTLE signal monitoring for market watchlists via CLI."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "requests-mock>=1.11",
+]
+
+[project.scripts]
+agentict = "agentict.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agentict"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
