@@ -67,8 +67,34 @@ definitions live in `.github/agents/` and their reusable methods live in
 `.github/skills/`. Product Requests are created only by the workflow; no public
 Product Request form or blank Issue entry is available.
 
+## Product Request implementation workflow
+
+Implementation starts manually from an approved Product Request:
+
+1. In GitHub, assign an Issue carrying the `product-request` label to the
+   **engineering-orchestrator** custom agent.
+2. The orchestrator checks that product decisions are no longer blocking,
+   coordinates the Tech Lead, Senior Software Engineer, QA Engineer, Software
+   Security Engineer, and Platform Engineer, and creates one dedicated branch
+   and draft pull request.
+3. The engineering team implements the request, adds and executes tests,
+   assesses and mitigates security risks, and validates packaging and required
+   Windows and Linux behavior.
+4. Reviewers request further work by mentioning `@copilot` on the pull request.
+   The same orchestrator continues on the existing branch, delegates the
+   affected work, reruns the relevant validations, and updates the pull request.
+5. Final validation, approval, marking the pull request ready, and merging
+   remain manual human responsibilities.
+
+The Product Request `/refine` command remains dedicated to product refinement.
+Engineering refinement uses the native Copilot pull-request session and does
+not require another Agentic Workflow.
+
 ## Engineering agents
 
+- **engineering-orchestrator**: coordinates implementation and refinement of an
+  assigned Product Request across the complete engineering team and maintains
+  its draft pull request.
 - **tech-lead**: combines Tech Lead and Software Architect responsibilities for
   feasibility, system boundaries, architecture decisions, non-functional
   requirements, and Windows/Linux compatibility. The existing name remains
