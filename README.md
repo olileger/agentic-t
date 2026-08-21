@@ -69,6 +69,20 @@ Product Request form or blank Issue entry is available.
 
 ## Engineering agents
 
+- **tech-lead**: combines Tech Lead and Software Architect responsibilities for
+  feasibility, system boundaries, architecture decisions, non-functional
+  requirements, and Windows/Linux compatibility. The existing name remains
+  stable for Product Discovery workflows.
 - **sr software engineer**: designs, implements, reviews, tests, and maintains
-  production-grade software. Technology expertise is supplied through reusable
-  skills, currently `python-engineering`.
+  production-grade Python software on Windows and Linux.
+- **qa-engineer**: owns risk-based test strategy, automated test implementation,
+  regression evidence, and cross-platform quality assessment.
+- **software-security-engineer**: owns threat modeling, application-security
+  review, security regression testing, and software supply-chain assessment.
+- **platform-engineer**: owns reproducible setup, packaging, CI, artifacts,
+  releases, and their operational and security foundations.
+
+Technology expertise is supplied through composable skills in
+`.github/skills/`. Shared skills cover Python architecture, engineering,
+testing, application security, supply-chain security, platform engineering, and
+cross-platform Windows/Linux behavior.
