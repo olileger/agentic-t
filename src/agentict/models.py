@@ -43,6 +43,14 @@ class PestleSignals:
     Each category maps to a single concatenated text blob built from all
     signal sources that contributed content relevant to that category. An
     empty string means no usable signal was collected for that category.
+
+    ``uncategorized`` holds text from sources that did not provide a
+    recognized ``category_hint``. It is intentionally excluded from
+    :meth:`non_empty_categories` (which only counts genuine PESTLE category
+    coverage) so a single uncategorized source cannot, by itself, satisfy a
+    "signal spans multiple PESTLE categories" requirement. It is still
+    included (once) in :meth:`combined_text` so heuristics/agents can
+    consider it as general context.
     """
 
     political: str = ""
@@ -51,6 +59,7 @@ class PestleSignals:
     technological: str = ""
     legal: str = ""
     environmental: str = ""
+    uncategorized: str = ""
 
     def as_dict(self) -> dict[str, str]:
         return {
@@ -63,12 +72,19 @@ class PestleSignals:
         }
 
     def non_empty_categories(self) -> list[str]:
-        """Return the names of categories with non-blank signal text."""
+        """Return the names of PESTLE categories with non-blank signal text.
+
+        Deliberately excludes ``uncategorized`` text.
+        """
         return [name for name, text in self.as_dict().items() if text.strip()]
 
     def combined_text(self) -> str:
-        """Return all category text concatenated for simple heuristics."""
-        return " ".join(text for text in self.as_dict().values() if text.strip())
+        """Return all category text (including uncategorized) concatenated
+        once each, for simple heuristics."""
+        parts = [text for text in self.as_dict().values() if text.strip()]
+        if self.uncategorized.strip():
+            parts.append(self.uncategorized)
+        return " ".join(parts)
 
 
 @dataclass

@@ -124,22 +124,25 @@ def _assess_entry(
 def _aggregate_signals(signals: list[RawSignal]) -> PestleSignals:
     """Aggregate raw signal text into PESTLE categories.
 
-    Signals with a known ``category_hint`` are appended to that category;
-    all other (uncategorized) signal text is appended to every category so
-    the heuristic/LLM agent can still consider it. This keeps collector
-    implementations simple (they don't need to classify PESTLE categories
-    themselves) while still giving the agent layer full visibility.
+    Signals with a known ``category_hint`` are appended to that specific
+    category. Signals without a recognized hint are appended to a distinct
+    ``uncategorized`` bucket instead of being broadcast into every category:
+    duplicating a single uncategorized source's text across all six PESTLE
+    fields would let it alone satisfy a "signal spans multiple categories"
+    requirement and would overweight it in simple keyword-tally heuristics.
+    This keeps collector implementations simple (they don't need to
+    classify PESTLE categories themselves) while still giving the agent
+    layer full visibility of the uncategorized text via
+    :meth:`PestleSignals.combined_text`.
     """
     pestle = PestleSignals()
     for signal in signals:
         text = signal.text.strip()
         if not text:
             continue
-        if signal.category_hint and hasattr(pestle, signal.category_hint):
+        if signal.category_hint and signal.category_hint in pestle.as_dict():
             current = getattr(pestle, signal.category_hint)
             setattr(pestle, signal.category_hint, f"{current} {text}".strip())
         else:
-            for category in pestle.as_dict():
-                current = getattr(pestle, category)
-                setattr(pestle, category, f"{current} {text}".strip())
+            pestle.uncategorized = f"{pestle.uncategorized} {text}".strip()
     return pestle

@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from agentict.models import Verdict, WatchlistEntry
-from agentict.orchestrator import build_report_rows
+from agentict.models import RawSignal, Verdict, WatchlistEntry
+from agentict.orchestrator import _aggregate_signals, build_report_rows
 
 from .fakes import FakeFinancialAnalyst, FakeSignalSource
 
@@ -38,6 +38,36 @@ def test_total_source_failure_forces_no_data_without_calling_analyst() -> None:
     assert rows[0].verdict == Verdict.NO_DATA
     assert "all signal sources failed" in rows[0].reason
     assert analyst.calls == []
+
+
+def test_aggregate_signals_does_not_broadcast_uncategorized_text_to_all_categories() -> None:
+    """Regression test: an uncategorized signal must not, by itself, count
+    as coverage across every PESTLE category or be duplicated 6x in the
+    combined text used for keyword tallies."""
+    signals = [
+        RawSignal(source_name="web_search", text="Strong growth expected", category_hint=None)
+    ]
+
+    pestle = _aggregate_signals(signals)
+
+    assert pestle.non_empty_categories() == []
+    assert pestle.uncategorized == "Strong growth expected"
+    assert pestle.combined_text().count("growth") == 1
+
+
+def test_aggregate_signals_keeps_categorized_and_uncategorized_text_separate() -> None:
+    signals = [
+        RawSignal(source_name="yahoo", text="Revenue grew this quarter", category_hint="economic"),
+        RawSignal(source_name="web_search", text="Community praises the product", category_hint=None),
+    ]
+
+    pestle = _aggregate_signals(signals)
+
+    assert pestle.non_empty_categories() == ["economic"]
+    assert pestle.economic == "Revenue grew this quarter"
+    assert pestle.uncategorized == "Community praises the product"
+    assert "Revenue grew this quarter" in pestle.combined_text()
+    assert "Community praises the product" in pestle.combined_text()
 
 
 def test_cross_exchange_duplicate_forces_no_data_and_skips_sources_and_analyst() -> None:
