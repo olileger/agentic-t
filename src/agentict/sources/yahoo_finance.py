@@ -9,10 +9,13 @@ a :class:`agentict.errors.SourceError`.
 
 from __future__ import annotations
 
+import json
+
 import requests
 
 from ..errors import SourceError
 from ..models import RawSignal
+from ._http import read_bounded_text
 
 _DEFAULT_TIMEOUT_SECONDS = 5
 _DEFAULT_ENDPOINT = "https://query1.finance.yahoo.com/v7/finance/quote"
@@ -38,16 +41,21 @@ class YahooFinanceSource:
                 params={"symbols": ticker},
                 timeout=self._timeout_seconds,
                 headers={"User-Agent": "agentict/0.1 (+one-time signal scan)"},
+                stream=True,
             )
             response.raise_for_status()
-            payload = response.json()
+            try:
+                body_text = read_bounded_text(response)
+            finally:
+                response.close()
+            payload = json.loads(body_text)
         except requests.RequestException as exc:
             raise SourceError(
                 f"{self.name}: request failed for {ticker} ({exchange}): {exc}"
             ) from exc
         except ValueError as exc:
             raise SourceError(
-                f"{self.name}: malformed JSON response for {ticker} ({exchange}): {exc}"
+                f"{self.name}: malformed or oversized response for {ticker} ({exchange}): {exc}"
             ) from exc
         except Exception as exc:  # noqa: BLE001 - collector boundary; must not leak
             raise SourceError(

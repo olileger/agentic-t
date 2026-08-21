@@ -13,6 +13,7 @@ import requests
 
 from ..errors import SourceError
 from ..models import RawSignal
+from ._http import read_bounded_text
 
 _DEFAULT_TIMEOUT_SECONDS = 5
 _DEFAULT_ENDPOINT = "https://duckduckgo.com/html/"
@@ -39,12 +40,20 @@ class WebSearchSource:
                 params={"q": query},
                 timeout=self._timeout_seconds,
                 headers={"User-Agent": "agentict/0.1 (+one-time signal scan)"},
+                stream=True,
             )
             response.raise_for_status()
-            text = response.text
+            try:
+                text = read_bounded_text(response)
+            finally:
+                response.close()
         except requests.RequestException as exc:
             raise SourceError(
                 f"{self.name}: request failed for {ticker} ({exchange}): {exc}"
+            ) from exc
+        except ValueError as exc:
+            raise SourceError(
+                f"{self.name}: response too large for {ticker} ({exchange}): {exc}"
             ) from exc
         except Exception as exc:  # noqa: BLE001 - collector boundary; must not leak
             raise SourceError(
